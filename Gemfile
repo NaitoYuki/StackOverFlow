@@ -45,3 +45,5 @@ end
 
 # Bootstrapのgem
 gem 'twitter-bootstrap-rails'
+
+gem 'devise'
