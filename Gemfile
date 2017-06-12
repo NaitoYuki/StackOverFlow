@@ -43,3 +43,5 @@ group :development, :test do
   gem 'spring'
 end
 
+# Bootstrapのgem
+gem 'twitter-bootstrap-rails'
