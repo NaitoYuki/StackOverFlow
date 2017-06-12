@@ -46,4 +46,8 @@ end
 # Bootstrapのgem
 gem 'twitter-bootstrap-rails'
 
+# 認証用のgem
 gem 'devise'
+
+# Heroku上のエラー用gem
+gem 'rails_12factor', group: :production
