@@ -3,6 +3,6 @@ class Question < ActiveRecord::Base
   belongs_to :user
 
   # タイトル、本文は必須入力
-  validate :title, presence: true
-  validate :content, presence: true
+  validates :title, presence: true
+  validates :content, presence: true
 end

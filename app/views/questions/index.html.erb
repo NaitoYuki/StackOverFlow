@@ -1,0 +1,13 @@
+<h1>質問一覧</h1>
+<%= link_to "質問する", new_question_path, class: 'btn btn-primary btn-sm' %>
+<% @questions.each do |question| %>
+<p>name:<%= question.user.name %></p>
+<p>title:<%= question.title %></p>
+<p>content:<%= question.content %><p>
+
+<% if login_user?(question) %>
+<%= link_to "編集", edit_question_path(question), class: 'btn btn-success btn-sm' %>
+<%= link_to "削除", question_path(question), method: :delete, data: { confirm: '本当に削除してよろしいですか？'} , class: 'btn btn-danger btn-sm' %>
+<% end %>
+
+<% end %>

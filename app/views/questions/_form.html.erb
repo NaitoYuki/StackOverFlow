@@ -1,0 +1,13 @@
+<%= form_for(@question) do |f| %>
+
+<%= f.label :title %>
+<%= f.text_field :title, class: 'form-control', placeholder: 'プログラミングに関しての質問は何ですか？具体的に書いてください。'  %>
+
+<%= f.label :content %>
+<%= f.text_area :content, class: 'form-control' %>
+
+<%= f.submit '質問を投稿する', class: 'btn btn-primary btn-block' %>
+
+<% end %>
+
+<%= link_to '質問一覧画面に戻る', questions_path %>
