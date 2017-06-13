@@ -6,6 +6,10 @@
 <%= f.label :content %>
 <%= f.text_area :content, class: 'form-control' %>
 
+<!-- タグフォーム application.jsに処理記載 -->
+<%= f.label :tag %>
+<ul id="question-tags"></ul>
+
 <%= f.submit '質問を投稿する', class: 'btn btn-primary btn-block' %>
 
 <% end %>

@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user! # ログイン時のみ使用可能
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question_tags_to_gon, only: [:edit]
+  before_action :set_available_tags_to_gon, only: [:new, :edit]
 
   def index
     @questions = Question.all
@@ -42,11 +44,21 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:title, :content)
+    params.require(:question).permit(:title, :content, :tag_list)
   end
 
   def set_question
     @question = Question.find(params[:id])
+  end
+
+  # gonでタグリストをapplication.jsへ渡す
+  def set_question_tags_to_gon
+    gon.question_tags = @question.tag_list
+  end
+
+  # gonでタグのオートコンプリートリストをapplication.jsへ渡す
+  def set_available_tags_to_gon
+    gon.available_tags = Question.tags_on(:tags).pluck(:name)
   end
 
 end
