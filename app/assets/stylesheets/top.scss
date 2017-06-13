@@ -1,3 +1,200 @@
 // Place all the styles related to the Top controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.container {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  margin-bottom: 50px;
+}
+
+.newuser {
+  padding: 15px 15px 10px;
+  background-color: #FFF8DC;
+  border: 1px solid #E0DCBF;
+  font-size: 14px;
+  text-align: left;
+}
+
+.tags {
+  padding: 15px 15px 10px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.contents-title {
+  text-align: left;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+table td.stats-value {
+  text-align: right;
+  width: 55px;
+  padding: 5px 10px 5px 0;
+  border-bottom: 1px solid #e4ddc2;
+  border-bottom: 1px solid #D5E5EC;
+}
+
+table td.stats-label {
+  padding: 5px 0 5px 10px;
+  border-bottom: 1px solid #e4ddc2;
+  color: #888474;
+  border-bottom: 1px solid #D5E5EC;
+  color: #586E78;
+}
+
+.post-tag {
+  color: #39739d;
+  background-color: #E1ECF4;
+  border-color: transparent;
+  position: relative;
+  display: inline-block;
+  padding: .4em .5em;
+  margin: 2px 2px 2px 0;
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0;
+  transition: all .15s ease-in-out;
+}
+
+a {
+  color: #07C;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.item-multiplier {
+  margin-right: 4px;
+  color: #848d95;
+}
+
+.item-multiplier-count {
+  font-size: 11px;
+  color: #6a737c;
+}
+
+.qlist-wrapper {
+   clear: both;
+}
+
+.question-mini-list {
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+.question-summary {
+  padding: 12px 0 10px 0;
+  border-bottom: 1px solid #e4e6e8;
+  overflow: hidden;
+  padding: 15px 0;
+  float: left;
+  width: 728px;
+  border-bottom: 1px solid #eff0f1;
+}
+
+.narrow .votes, .narrow .status, .narrow .views {
+    padding: 8px 5px;
+    line-height: 1;
+}
+
+.narrow .votes {
+  display: inline-block;
+  height: 38px;
+  min-width: 38px;
+  margin: 0 3px 0 0;
+  font-size: 11px;
+  color: #848d95;
+  padding: 5px 5px 6px;
+}
+
+.votes {
+  padding: 0;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.narrow .mini-counts {
+  margin-bottom: 2px;
+}
+
+.narrow .mini-counts {
+  font-size: 17px;
+  font-weight: 300;
+  color: #6a737c;
+  margin-bottom: 4px;
+}
+
+.narrow .status {
+  color: #848d95;
+}
+
+.narrow .status {
+  display: inline-block;
+  margin: 0 3px 0 0;
+  min-width: 44px;
+  height: auto;
+  font-size: 11px;
+  padding: 6px;
+}
+
+.status {
+  padding: 0;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.narrow .views {
+  display: inline-block;
+  height: 38px;
+  min-width: 40px;
+  margin: 0 7px 0 0;
+  font-size: 11px;
+  color: #848d95;
+  padding: 5px 5px 6px;
+}
+
+.views {
+  padding-top: 4px;
+  text-align: center;
+}
+
+.narrow .summary {
+  width: 530px;
+  padding: 0;
+  float: left;
+}
+
+.summary {
+  float: left;
+  width: 630px;
+}
+
+.narrow .summary h3 {
+  margin-bottom: .35em;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.summary h3 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: .5em;
+}
+
+.narrow .cp {
+  vertical-align: top;
+  float: left;
+  margin-right: 10px;
+}
+
+.cp {
+  cursor: pointer;
+}
