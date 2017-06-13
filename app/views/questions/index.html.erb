@@ -2,7 +2,7 @@
 <%= link_to "質問する", new_question_path, class: 'btn btn-primary btn-sm' %>
 <% @questions.each do |question| %>
 <p>name:<%= question.user.name %></p>
-<p>title:<%= question.title %></p>
+<p>title:<%= link_to question.title, question_path(question) %></p>
 <p>content:<%= question.content %><p>
 
 <% if login_user?(question) %>

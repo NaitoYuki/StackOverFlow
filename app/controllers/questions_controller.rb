@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # TODO: Answerモデル実装後に作成
+    @answer = @question.answers.build
+    @answers = @question.answers
   end
 
   def new

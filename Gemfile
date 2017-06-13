@@ -41,6 +41,12 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # ローカル環境でのメール確認gem
+  gem 'letter_opener_web'
+
+  # .envファイル用のgem
+  gem 'dotenv-rails'
 end
 
 # Bootstrapのgem
@@ -51,3 +57,13 @@ gem 'devise'
 
 # Heroku上のエラー用gem
 gem 'rails_12factor', group: :production
+
+
+# SNSログイン用gem
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+# プロフィール画像用gem
+gem 'carrierwave'
+gem 'rmagick'
