@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'top#index'
 
   resources :questions do
-    resources :answers
+    resources :answers, only: [:edit, :create, :update, :destroy]
   end
 
   if Rails.env.development?
