@@ -1,0 +1,16 @@
+<ul>
+<% answers.each do |answer| %>
+  <% unless answer.id.nil? %>
+  <li>
+    <p>name:<%= answer.user.name %></p>
+    <p>content:<%= answer.content %></p>
+    <% if login_user?(answer) %>
+    <p>
+    <%= link_to "編集", edit_question_answer_path(question, answer) %>
+    <%= link_to "削除", question_answer_path(question, answer), method: :delete, remote: true, data: { confirm: '本当に削除してよろしいですか？'} %>
+    </p>
+    <% end %>
+  </li>
+  <% end %>
+<% end %>
+</ul>

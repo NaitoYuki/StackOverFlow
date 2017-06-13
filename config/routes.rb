@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
-  resources :questions
+  resources :questions do
+    resources :answers, only: [:edit, :create, :update, :destroy]
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
