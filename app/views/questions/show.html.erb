@@ -1,0 +1,14 @@
+<h1>質問詳細</h1>
+<p>name:<%= @question.user.name %></p>
+<p>title:<%= @question.title %></p>
+<p>content:<%= @question.content %><p>
+
+<h2>回答一覧</h2>
+<div id="answers_area">
+<%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
+</div>
+<%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
+<% if login_user?(@question) %>
+<%= link_to '編集', edit_question_path(@question) %>
+<% end %>
+<%= link_to '戻る', questions_path %>
