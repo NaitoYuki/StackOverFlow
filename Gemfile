@@ -47,6 +47,11 @@ group :development, :test do
 
   # .envファイル用のgem
   gem 'dotenv-rails'
+
+  # デバッグ用gem
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Bootstrapのgem
