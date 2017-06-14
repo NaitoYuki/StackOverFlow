@@ -67,3 +67,8 @@ gem 'omniauth-facebook'
 # プロフィール画像用gem
 gem 'carrierwave'
 gem 'rmagick'
+
+# タグ機能用gem
+gem 'acts-as-taggable-on'
+gem 'jquery-ui-rails'
+gem 'gon'
