@@ -1,5 +1,5 @@
 <h1>回答を編集する</h1>
-<%= form_for(@answer, url: question_answer_path) fo |f| %>
+<%= form_for(@answer, url: question_answer_path) do |f| %>
 <%= f.label :content %>
 <%= f.text_area :content, class: 'form-control' %>
 <%= f.submit '投稿', class: 'btn btn-primary btn-sm' %>

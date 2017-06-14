@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
 
   def update
     @answer.update(answer_params)
-    redirect_to quesiton_path(@answer.question), notice: "回答を更新しました！"
+    redirect_to question_path(@answer.question), notice: "回答を更新しました！"
   end
 
   def create
