@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:edit, :update, :destroy]
+  before_action :set_answer, only: [:edit, :update, :destroy, :vote_up, :vote_down]
 
   def edit
   end
@@ -29,6 +29,22 @@ class AnswersController < ApplicationController
         format.js
         format.html { render 'questions/index' }
       end
+    end
+  end
+
+  def vote_up
+    @question = @answer.question
+    respond_to do |format|
+      @answer.increment!(:vote_count, 1)
+      format.js { render :vote }
+    end
+  end
+
+  def vote_down
+    @question = @answer.question
+    respond_to do |format|
+      @answer.decrement!(:vote_count, 1)
+      format.js { render :vote }
     end
   end
 

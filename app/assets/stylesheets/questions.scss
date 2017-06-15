@@ -5,3 +5,23 @@
 .ui-helper-hidden-accessible {
   display: none;
 }
+
+.vote-up {
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-bottom: 15px solid #818185;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.vote-down {
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-top: 15px solid #818185;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}

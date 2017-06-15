@@ -8,7 +8,16 @@ Rails.application.routes.draw do
   root 'top#index'
 
   resources :questions do
-    resources :answers, only: [:edit, :create, :update, :destroy]
+    member do
+      get :vote_up
+      get :vote_down
+    end
+    resources :answers, only: [:edit, :create, :update, :destroy] do
+      member do
+        get :vote_up
+        get :vote_down
+      end
+    end
   end
 
   if Rails.env.development?
