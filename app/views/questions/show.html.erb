@@ -2,6 +2,9 @@
 <p>name:<%= @question.user.name %></p>
 <p>title:<%= @question.title %></p>
 <p>content:<%= @question.content %><p>
+<div id="question-<%= @question.id %>">
+<%= render partial: 'vote', locals: { question: @question } %>
+</div>
 
   <!-- タグ表示 -->
 <%= render partial: 'tags', locals: { tags: @question.tags } %>

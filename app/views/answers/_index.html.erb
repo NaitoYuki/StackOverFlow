@@ -4,6 +4,9 @@
   <li>
     <p>name:<%= answer.user.name %></p>
     <p>content:<%= answer.content %></p>
+    <div id="answer-<%= answer.id %>">
+    <%= render partial: 'answers/vote', locals: { question: question, answer: answer } %>
+    </div>
     <% if login_user?(answer) %>
     <p>
     <%= link_to "編集", edit_question_answer_path(question, answer) %>
