@@ -6,6 +6,9 @@
 <%= render partial: 'vote', locals: { question: @question } %>
 </div>
 
+  <!-- タグ表示 -->
+<%= render partial: 'tags', locals: { tags: @question.tags } %>
+
 <h2>回答一覧</h2>
 <div id="answers_area">
 <%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>

@@ -2,10 +2,15 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user! # ログイン時のみ使用可能
   before_action :set_question, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :set_question_tags_to_gon, only: [:edit]
-  before_action :set_available_tags_to_gon, only: [:new, :edit]
+  before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update, :show]
 
   def index
-    @questions = Question.all
+    if params[:tag].present?
+      @questions = Question.tagged_with(params[:tag]) # タグによる抽出
+    else
+      @questions = Question.all
+    end
+    @questions = @questions.includes(:tags)
   end
 
   def show

@@ -1,0 +1,4 @@
+<% @users.each do |user| %>
+ <%= profile_img(user) %>
+ <%= link_to user.name, user %>
+<% end %>

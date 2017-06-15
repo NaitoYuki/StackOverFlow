@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index, :show]
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

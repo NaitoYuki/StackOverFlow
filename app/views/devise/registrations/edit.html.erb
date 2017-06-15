@@ -1,50 +1,73 @@
-<h2>ユーザー編集</h2>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">ユーザー編集</a></li>
+    <li><a data-toggle="tab" href="#menu1">お気に入り一覧</a></li>
+    <li><a data-toggle="tab" href="#menu2">質問一覧</a></li>
+    <li><a data-toggle="tab" href="#menu3">回答一覧</a></li>
+</ul>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
+        </div>
+
+      <% if @user.provider.blank? %>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "パスワード確認" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "現在のパスワード" %>
+        </div>
+
+      <% end %>
+
+        <div class="field">
+          <%= profile_img(@user) if profile_img(@user) %>
+          <%= f.file_field :avatar %>
+          <%= f.hidden_field :avatar %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "更新", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+
+
+      <h3>アカウント削除</h3>
+
+      <p><%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "本当にいいですか?" }, method: :delete %></p>
+
+      <%= link_to "戻る", :back %>
+    </div>
+
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-  </div>
-
-<% if @user.provider.blank? %>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "パスワード確認" %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "現在のパスワード" %>
-  </div>
-
-<% end %>
-
-  <div class="field">
-    <%= profile_img(@user) if profile_img(@user) %>
-    <%= f.file_field :avatar %>
-    <%= f.hidden_field :avatar %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "更新", class: "btn btn-primary btn-block" %>
-  </div>
-<% end %>
-
-
-<h3>アカウント削除</h3>
-
-<p><%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "本当にいいですか?" }, method: :delete %></p>
-
-<%= link_to "戻る", :back %>
+</div>
