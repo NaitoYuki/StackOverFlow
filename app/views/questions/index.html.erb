@@ -4,6 +4,7 @@
 <p>name:<%= question.user.name %></p>
 <p>title:<%= link_to question.title, question_path(question) %></p>
 <p>content:<%= question.content %><p>
+<p>vote_count:<%= question.vote_count %><p>
 
   <!-- タグ表示 -->
 <% question.tag_list.each do |tag| %>
