@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'tags/index'
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
+
+  resources :tags, only: [:index]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
