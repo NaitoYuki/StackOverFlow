@@ -2,7 +2,13 @@ class User < ActiveRecord::Base
   # ユーザー：質問は１対多の関係
   has_many :questions, dependent: :destroy
   # ユーザー：回答は１対多の関係
-  has_many :answers, dependent: :destroy  
+  has_many :answers, dependent: :destroy
+
+  # 1人のユーザーは複数のlikeができる
+  has_many :likes, dependent: :destroy
+
+  # likeした全ての質問と繋げる
+  has_many :liked_questions, through: :likes, source: :question
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -58,5 +64,5 @@ class User < ActiveRecord::Base
       params.delete :current_password
       update_without_password(params, *options)
     end
-  end      
+  end
 end
