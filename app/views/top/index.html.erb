@@ -5,52 +5,28 @@
       <h4 class="contents-title">質問を見る</h4>
       <div class="qlist-wrapper">
         <div class="question-mini-list">
+          <% @questions.each do |question| %>
           <div class="question-summary narrow">
             <div class="cp">
               <div class="votes">
-                <div class="mini-counts"><span title="0 票">0</span></div>
+                <div class="mini-counts"><span><%= question.vote_count %></span></div>
                 <div>票</div>
               </div>
               <div class="status unanswered">
-                <div class="mini-counts"><span title="0 件の回答">0</span></div>
+                <div class="mini-counts"><span><%= question.answers.count %></span></div>
                 <div>回答</div>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="7 件の閲覧数">7</span></div>
-                <div>閲覧数</div>
               </div>
             </div>
             <div class="summary">
-              <h3><a href="#" class="question-hyperlink">vectorを用いた構造体配列の最大値の求め方</a></h3>
+              <h3>
+                <%= link_to "#{question.title}", question_path(question), class: 'question-hyperlink' %>
+              </h3>
               <div class="tags">
-                <a href="#" class="post-tag">c++</a>
-                <a href="#" class="post-tag">c++11</a>
+                <%= render partial: 'tags', locals: { tags: question.tags } %>
               </div>
             </div>
           </div>
-          <div class="question-summary narrow">
-            <div class="cp">
-              <div class="votes">
-                <div class="mini-counts"><span title="0 票">0</span></div>
-                <div>票</div>
-              </div>
-              <div class="status unanswered">
-                <div class="mini-counts"><span title="0 件の回答">0</span></div>
-                <div>回答</div>
-              </div>
-              <div class="views">
-                <div class="mini-counts"><span title="7 件の閲覧数">7</span></div>
-                <div>閲覧数</div>
-              </div>
-            </div>
-            <div class="summary">
-              <h3><a href="#" class="question-hyperlink">vectorを用いた構造体配列の最大値の求め方</a></h3>
-              <div class="tags">
-                <a href="#" class="post-tag">c++</a>
-                <a href="#" class="post-tag">c++11</a>
-              </div>
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -61,44 +37,31 @@
         <h4>サイト統計情報</h4>
         <table>
           <tr>
-            <td class="stats-value">14,248</td>
+            <td class="stats-value"><%= @answer_counts %></td>
             <td class="stats-label">回答</td>
           </tr>
           <tr>
-            <td class="stats-value">11,778</td>
+            <td class="stats-value"><%= @question_counts %></td>
             <td class="stats-label">質問</td>
           </tr>
           <tr>
-            <td class="stats-value">80%</td>
-            <td class="stats-label">回答済</td>
-          </tr>
-          <tr>
-            <td class="stats-value">12,178</td>
+            <td class="stats-value"><%= @user_counts %></td>
             <td class="stats-label">ユーザー</td>
-          </tr>
-          <tr>
-            <td class="stats-value">17,922</td>
-            <td class="stats-label">訪問／日</td>
           </tr>
         </table>
       </div>
       </br>
       <div class="tags">
         <h4>最近のタグ</h4>
-          <a class="post-tag">javascript</a>
+        <% @tags.each do |tag| %>
+          <%= link_to "#{tag.name}", questions_path(tag: tag.name), class: 'post-tag' %>
           &nbsp;
           <span class="item-multiplier">
             <span class="item-multiplier-x">&times;</span>&nbsp;
-            <span class="item-multiplier-count">71</span>
+            <span class="item-multiplier-count"><%= tag.taggings_count %></span>
           </span>
         </br>
-          <a class="post-tag">python</a>
-          &nbsp;
-          <span class="item-multiplier">
-            <span class="item-multiplier-x">&times;</span>&nbsp;
-            <span class="item-multiplier-count">60</span>
-          </span>
-          <br>
+        <% end %>
       </div>
     </div>
   </div>
