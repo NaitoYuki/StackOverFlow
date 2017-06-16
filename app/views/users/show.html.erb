@@ -6,21 +6,22 @@
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <h3>profile</h3>
+      <h3>プロフィール</h3>
       <p>
         <%= profile_img(@user) %>
         <%= @user.name %>
       </p>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
+      <h3>お気に入り</h3>
       <p>
-
       </p>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>貢献度</h3>
+
       <p><%= contribute(@user) %></p>
+
     </div>
   </div>
 </div>

@@ -22,7 +22,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    resources :questions
+  end
+
+  resources :questions do
+    resources :likes, only: [:create, :destroy]
+  end
 
   resources :tags, only: [:index]
 
