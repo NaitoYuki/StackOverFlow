@@ -1,6 +1,10 @@
 ja:
   activerecord:
     models:
+      user: "ユーザー"
+      question: "質問"
+      answer: "回答"
+    attributes:
       user:
         title: "タイトル"
         name: "名前"
@@ -10,3 +14,10 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
+      question:
+        title: "タイトル"
+        content: "本文"
+        vote_count: "票"
+      answer:
+        content: "本文"
+        vote_count: "票"

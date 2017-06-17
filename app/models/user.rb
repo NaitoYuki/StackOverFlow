@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   # likeした全ての質問と繋げる
   has_many :liked_questions, through: :likes, source: :question
 
+  def already_liked?(question)
+    self.likes.exists?(question_id: question.id)
+  end  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
