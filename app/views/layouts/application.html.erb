@@ -33,6 +33,7 @@
               <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
               <li><%= link_to "ユーザー一覧", users_path if user_signed_in? %></li>
             <% else %>
+              <li><%= link_to '質問', root_path %></li>
               <li><%= link_to 'ログイン', new_user_session_path %></li>
               <li><%= link_to '登録', new_user_registration_path  %></li>
             <% end %>

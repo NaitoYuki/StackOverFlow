@@ -5,6 +5,13 @@ class QuestionsController < ApplicationController
   before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update, :show]
 
   def index
+    # テーブル情報の取得
+    @user_counts = User.count
+    @question_counts = Question.count
+    @answer_counts = Answer.count
+
+    # タグ情報の取得
+    @tags = Question.tags_on(:tags)
     if params[:tag].present?
       @questions = Question.tagged_with(params[:tag]) # タグによる抽出
     else
