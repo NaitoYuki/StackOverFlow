@@ -1,30 +1,88 @@
-<h1>質問詳細</h1>
-<p>name:<%= @question.user.name %></p>
-<p>title:<%= @question.title %></p>
-<p>content:<%= @question.content %><p>
-<div id="question-<%= @question.id %>">
-<%= render partial: 'vote', locals: { question: @question } %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="question-header">
+        <%= link_to "質問する", new_question_path, class: 'btn btn-primary btn-sm fr' %>
+        <h4 class="contents-title cb pb10"><%= @question.title %></h4>
+      </div>
+      <div class="question">
+        <table>
+          <tbody>
+            <tr>
+              <td class="votecell">
+                <div class="vote">
+                  <div id="question-<%= @question.id %>">
+                    <%= render partial: 'vote', locals: { question: @question } %>
+                  </div>
+                  <div class="favorite">
+                    <!-- いいねボタン -->
+                    <p>
+                    <% if current_user.already_liked?(@question) %>
+                      <%= link_to '', question_like_path(question_id: @question.id), remote: true, method: :delete, class: 'fa fa-star fa-2x star-on' %>
+                    <% else %>
+                      <%= link_to '', question_likes_path(question_id: @question.id), remote: true, method: :post, class: 'fa fa-star fa-2x star-off' %>
+                    <% end %>
+                    </p>
+                    <p><%= @question.likes.count %></p>
+                  </div>
+                </div>
+              </td>
+              <td class="postcell">
+                <div class="post-text">
+                  <p><%= @question.content %></p>
+                </div>
+                <div class="post-taglist">
+                  <!-- タグ表示 -->
+                  <%= render partial: 'tags', locals: { tags: @question.tags } %>
+                </div>
+                <table class="question-footer">
+                  <tbody>
+                    <tr>
+                      <td class="vt">
+                        <div class="post-menu">
+                          <% if login_user?(@question) %>
+                          <%= link_to '編集', edit_question_path(@question) %>
+                          <%= link_to '削除', question_path(@question), method: :delete, remote: true, data: { confirm: '本当に削除してよろしいですか？'} %>
+                          <% end %>
+                        </div>
+                      </td>
+                      <td class="post-signature">
+                        <div class="user-info">
+                          <div class="user-action-time">質問日時:<%= @question.created_at.strftime('%y年%m月%d日 %H:%M') %></div>
+                          <div class="user-avatar">
+                            <%= profile_img_32(@question.user) %>
+                          </div>
+                          <div class="user-details">
+                            <%= link_to @question.user.name, user_path(@question.user) %>
+                            <div class="cb"></div>
+                            <span class="contribution-count">
+                              貢献度:<%= contribute(@question.user) %>
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="answers">
+        <div class="answers-header">
+          <h4 class="contents-title pb10"><%= @question.answers.count %>件の回答</h4>
+        </div>
+        <div id="answers_area">
+          <%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
+        </div>
+      </div>
+      <div class="answers_form">
+        <h4 class="answers_form-title pb10">回答</h4>
+        <%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
+      </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
 </div>
-
-
-  <!-- タグ表示 -->
-<%= render partial: 'tags', locals: { tags: @question.tags } %>
-
-  <!-- いいねボタン -->
-<%= @question.likes.count %>
-<% if current_user.already_liked?(@question) %>
-    <%= button_to 'いいねを取り消す', question_like_path(question_id: @question.id), remote: true, method: :delete %>
-<% else %>
-    <%= button_to 'いいね!', question_likes_path(question_id: @question.id), remote: true %>
-<% end %>
-
-
-<h2>回答一覧</h2>
-<div id="answers_area">
-<%= render partial: 'answers/index', locals: { answers: @answers, question: @question } %>
-</div>
-<%= render partial: 'answers/form', locals: { answer: @answer, question: @question } %>
-<% if login_user?(@question) %>
-<%= link_to '編集', edit_question_path(@question) %>
-<% end %>
-<%= link_to '戻る', questions_path %>

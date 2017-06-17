@@ -1,19 +1,53 @@
-<ul>
 <% answers.each do |answer| %>
-  <% unless answer.id.nil? %>
-  <li>
-    <p>name:<%= answer.user.name %></p>
-    <p>content:<%= answer.content %></p>
-    <div id="answer-<%= answer.id %>">
-    <%= render partial: 'answers/vote', locals: { question: question, answer: answer } %>
-    </div>
-    <% if login_user?(answer) %>
-    <p>
-    <%= link_to "編集", edit_question_answer_path(question, answer) %>
-    <%= link_to "削除", question_answer_path(question, answer), method: :delete, remote: true, data: { confirm: '本当に削除してよろしいですか？'} %>
-    </p>
-    <% end %>
-  </li>
-  <% end %>
+<% unless answer.id.nil? %>
+<div class="answer">
+<table>
+  <tbody>
+    <tr>
+      <td class="votecell">
+        <div class="vote">
+          <div id="answer-<%= answer.id %>">
+            <%= render partial: 'answers/vote', locals: { question: question, answer: answer } %>
+          </div>
+        </div>
+      </td>
+      <td class="postcell">
+        <div class="post-text">
+          <p><%= answer.content %></p>
+        </div>
+        <table class="answer-footer">
+          <tbody>
+            <tr>
+              <td class="vt">
+                <div class="post-menu">
+                  <% if login_user?(answer) %>
+                  <%= link_to "編集", edit_question_answer_path(question, answer) %>
+                  <%= link_to "削除", question_answer_path(question, answer), method: :delete, remote: true, data: { confirm: '本当に削除してよろしいですか？'} %>
+                  <% end %>
+                </div>
+              </td>
+              <td class="post-signature">
+                <div class="user-info">
+                  <div class="user-action-time">回答日時:<%= answer.updated_at.strftime('%y年%m月%d日 %H:%M') %></div>
+                  <div class="user-avatar">
+                    <%= profile_img_32(answer.user) %>
+                  </div>
+                  <div class="user-details">
+                    <%= link_to answer.user.name, user_path(answer.user) %>
+                    <div class="cb"></div>
+                    <span class="contribution-count">
+                      貢献度:<%= contribute(answer.user) %>
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 <% end %>
-</ul>
+<% end %>

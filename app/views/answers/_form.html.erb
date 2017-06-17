@@ -1,5 +1,6 @@
 <%= form_for([question, answer], remote: true) do |f| %>
 <%= f.hidden_field :question_id %>
-<%= f.text_area :content, placeholder: "内容", class: "form-control" %>
+<%= f.text_area :content, placeholder: "内容", class: "form-control", rows: 6 %>
+<br>
 <%= f.submit "回答を投稿", class: "btn btn-primary btn-sm" %>
 <% end %>
