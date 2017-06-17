@@ -44,6 +44,11 @@
 
                     </div>
 
+                    <div class="question-counter-set">
+                      <%= @questions_one_week.tagged_with(tag).count %>件の今週の質問数,
+                      <%= @questions_one_month.tagged_with(tag).count %>件の今月の質問数
+                    </div>
+
                   </div>
                 </div>
                 <% end %>
@@ -51,11 +56,9 @@
         </div>
 
         <div id="tags-index-name" class="tab-pane fade">
-          <p>名前</p>
         </div>
 
         <div id="tags-index-new" class="tab-pane fade">
-          <p>新規</p>
         </div>
 
       </div> <!--- row --->
