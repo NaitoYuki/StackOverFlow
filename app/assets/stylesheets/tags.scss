@@ -25,10 +25,19 @@
 #tags-index-nav {
   font-size: 12px;
   margin-left: auto;
+  border-bottom: none;
+}
+
+#tags-index-nav .active a{
+  border-radius: 0px;
+  margin-right: 0;
+  line-height: 1.3;
+  border-top: 2px solid #f69c55;
 }
 
 #tags-index-nav a{
   border-radius: 0px;
+  margin-right: 0;
 }
 
 .tags-page-description {
@@ -41,7 +50,32 @@
   padding: 5px 0px 5px 0px;
 }
 
-.tag-list {
+.tag-search-box form{
+  padding-left: 10px;
+}
+
+#tags-index-home.tab-pane {
+  display: none;
+}
+
+#tags-index-home.active {
+  display: block;
+}
+
+#tags-index-name.tab-pane {
+  display: none;
+}
+
+#tags-index-name.active {
+  display: block;
+}
+
+#tags-index-new.tab-pane {
+  display: none;
+}
+
+#tags-index-new.active {
+  display: block;
 }
 
 .tag-cell {
