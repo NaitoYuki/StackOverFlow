@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'tags/index'
-
   devise_for :users, controllers: {
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"

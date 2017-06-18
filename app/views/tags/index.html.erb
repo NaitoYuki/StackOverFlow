@@ -1,3 +1,112 @@
-<% @tags.each do |tag| %>
- <%= link_to "#{tag.name}", questions_path(tag: tag.name) %> x <%= tag.taggings_count %><br/>
-<% end %>
+<div class="container">
+
+  <div id="tags-index-content" class="snippet-hidden">
+    <div class="tags-index-subheader">
+      <h1 id="h-tags">タグ</h1>
+      <ul id="tags-index-nav" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tags-index-home">人気</a></li>
+        <li><a data-toggle="tab" href="#tags-index-name">名前</a></li>
+        <li><a data-toggle="tab" href="#tags-index-new">新規</a></li>
+      </ul>
+    </div>
+
+     <div class="tags-page-description">
+       <p>
+         タグとは、あなたの質問をよく似た他の質問と一緒に分類するキーワードまたはラベルのことです。
+         適切なタグを使用することで、他のユーザーがあなたの質問を検索したり、
+         質問に対して回答したりすることが容易になります。
+       </p>
+        <div class="tag-search-box">
+           <p>検索するタグを入力:</p>
+           <%= form_tag tags_path, method: "get" do %>
+             <%= text_field_tag :search, params[:search] %>
+             <% submit_tag "Search" %>
+           <% end %>
+        </div>
+     </div>
+
+    <div class="tags-list">
+      <div class="row">
+        <div id="tags-index-home" class="tab-pane fade in active">
+
+                <% @tags.each do |tag| %>
+                <div class="wrapper col-lg-3 col-md-3 col-sm-5 col-xs-10">
+                  <div class="tag-cell">
+                    <div class="tag-count-set">
+                     <%= link_to "#{tag.name}", questions_path(tag: tag.name), class: "post-tag"%>
+                     &nbsp;
+                     <span class="item-multiplier">
+                       <span class="item-multiplier-x">&times;</span>&nbsp;
+                       <span class="item-multiplier-count"><%= tag.taggings_count %></span>
+                     </span>
+                    </div>
+                    <div class="excerpt">
+
+                    </div>
+
+                    <div class="question-counter-set">
+                      <%= @questions_one_week.tagged_with(tag).count %>件の今週の質問数,
+                      <%= @questions_one_month.tagged_with(tag).count %>件の今月の質問数
+                    </div>
+
+                  </div>
+                </div>
+                <% end %>
+
+        </div>
+
+        <div id="tags-index-name" class="tab-pane fade">
+          <% @tags_name.each do |tag| %>
+          <div class="wrapper col-lg-3 col-md-3 col-sm-5 col-xs-10">
+            <div class="tag-cell">
+              <div class="tag-count-set">
+               <%= link_to "#{tag.name}", questions_path(tag: tag.name), class: "post-tag"%>
+               &nbsp;
+               <span class="item-multiplier">
+                 <span class="item-multiplier-x">&times;</span>&nbsp;
+                 <span class="item-multiplier-count"><%= tag.taggings_count %></span>
+               </span>
+              </div>
+              <div class="excerpt">
+
+              </div>
+
+              <div class="question-counter-set">
+                <%= @questions_one_week.tagged_with(tag).count %>件の今週の質問数,
+                <%= @questions_one_month.tagged_with(tag).count %>件の今月の質問数
+              </div>
+
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+        <div id="tags-index-new" class="tab-pane fade">
+          <% @tags_new.each do |tag| %>
+          <div class="wrapper col-lg-3 col-md-3 col-sm-5 col-xs-10">
+            <div class="tag-cell">
+              <div class="tag-count-set">
+               <%= link_to "#{tag.name}", questions_path(tag: tag.name), class: "post-tag"%>
+               &nbsp;
+               <span class="item-multiplier">
+                 <span class="item-multiplier-x">&times;</span>&nbsp;
+                 <span class="item-multiplier-count"><%= tag.taggings_count %></span>
+               </span>
+              </div>
+              <div class="excerpt">
+
+              </div>
+
+              <div class="tags-created-at">
+                作成日時: <%= tags_created_at(tag) %>
+              </div>
+
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+      </div> <!--- row --->
+    </div> <!--- tas-list --->
+  </div> <!--- tags-index-content--->
+</div> <!--- container --->
