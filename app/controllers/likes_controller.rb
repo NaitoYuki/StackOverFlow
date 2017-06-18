@@ -5,11 +5,9 @@ class LikesController < ApplicationController
     @question = Question.find(params[:question_id])
     @like = Like.new(question_id: params[:question_id], user_id: current_user.id)
 
-    if @like.save
-      redirect_to question_path(@question)
-    else
-      render 'questions/show'
-    end  
+    @like.save
+    render 'questions/show'
+
   end
 
   def destroy
