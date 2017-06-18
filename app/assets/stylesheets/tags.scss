@@ -28,6 +28,13 @@
   border-bottom: none;
 }
 
+#tags-index-nav .active a{
+  border-radius: 0px;
+  margin-right: 0;
+  line-height: 1.3;
+  border-top: 2px solid #f69c55;
+}
+
 #tags-index-nav a{
   border-radius: 0px;
   margin-right: 0;
