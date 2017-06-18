@@ -50,7 +50,32 @@
   padding: 5px 0px 5px 0px;
 }
 
-.tag-list {
+.tag-search-box form{
+  padding-left: 10px;
+}
+
+#tags-index-home.tab-pane {
+  display: none;
+}
+
+#tags-index-home.active {
+  display: block;
+}
+
+#tags-index-name.tab-pane {
+  display: none;
+}
+
+#tags-index-name.active {
+  display: block;
+}
+
+#tags-index-new.tab-pane {
+  display: none;
+}
+
+#tags-index-new.active {
+  display: block;
 }
 
 .tag-cell {
