@@ -1,17 +1,19 @@
 <%= form_for(@question) do |f| %>
-
-<%= f.label :title %>
-<%= f.text_field :title, class: 'form-control', placeholder: 'プログラミングに関しての質問は何ですか？具体的に書いてください。'  %>
-
-<%= f.label :content %>
-<%= f.text_area :content, class: 'form-control' %>
-
+<div class="form-group">
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control', placeholder: 'プログラミングに関しての質問は何ですか？具体的に書いてください。'  %>
+</div>
+<div class="form-group">
+  <div id='editor'>
+    <textarea name="question[content]" class="form-control" rows="10"><%= @question.content %></textarea>
+    <!-- <%= f.text_area :content, class: 'form-control', rows: 10 %> -->
+    <div id="marked-area"></div>
+  </div>
+</div>
 <!-- タグフォーム application.jsに処理記載 -->
-<%= f.label :tag %>
+<div class="form-group">
+<%= f.label 'タグ' %>
 <ul id="question-tags"></ul>
-
-<%= f.submit '質問を投稿する', class: 'btn btn-primary btn-block' %>
-
+</div>
+<%= f.submit '質問を投稿する', class: 'btn btn-primary btn-sm' %>
 <% end %>
-
-<%= link_to '質問一覧画面に戻る', questions_path %>
