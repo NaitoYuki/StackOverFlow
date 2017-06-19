@@ -118,6 +118,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
+    marked-rails (0.3.2.0)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -258,6 +259,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   letter_opener_web
+  marked-rails
   omniauth
   omniauth-facebook
   omniauth-twitter

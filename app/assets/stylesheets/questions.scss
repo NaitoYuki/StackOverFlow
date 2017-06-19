@@ -158,3 +158,16 @@
 .fr {
   float: right;
 }
+
+#marked-area {
+  text-align: left;
+  padding: 10px 0;
+  margin: 20px 0 10px 0;
+  border-top: 1px dotted #DCDCDC;
+  border-bottom: 1px dotted #DCDCDC;
+  word-wrap:break-word;
+}
+
+#marked-area p {
+  white-space: pre-wrap;
+}

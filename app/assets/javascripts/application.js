@@ -16,6 +16,7 @@
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require tag-it
+//= require marked
 //= require_tree .
 
 $( document ).on ('turbolinks:load', function(){
