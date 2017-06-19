@@ -56,17 +56,13 @@ class QuestionsController < ApplicationController
   end
 
   def vote_up
-    respond_to do |format|
-      @question.increment!(:vote_count, 1)
-      format.js { render :vote }
-    end
+    @question.increment!(:vote_count, 1)
+    render :vote
   end
 
   def vote_down
-    respond_to do |format|
-      @question.decrement!(:vote_count, 1)
-      format.js { render :vote }
-    end
+    @question.decrement!(:vote_count, 1)
+    render :vote
   end
 
   private
