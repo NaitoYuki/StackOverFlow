@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def already_liked?(question)
     self.likes.exists?(question_id: question.id)
-  end  
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

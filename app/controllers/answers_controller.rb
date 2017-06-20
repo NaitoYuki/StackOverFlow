@@ -13,39 +13,27 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.build(answer_params)
     @question = @answer.question
 
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to question_path(@question), notice: "回答を投稿しました！" }
-        format.js { render :index }
-      else
-        format.html { render 'questions/index' }
-      end
+    if @answer.save
+      render :index
+    else
+      render 'questions/index'
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @answer.destroy
-        format.js
-        format.html { render 'questions/index' }
-      end
-    end
+    @answer.destroy
   end
 
   def vote_up
     @question = @answer.question
-    respond_to do |format|
-      @answer.increment!(:vote_count, 1)
-      format.js { render :vote }
-    end
+    @answer.increment!(:vote_count, 1)
+    render :vote
   end
 
   def vote_down
     @question = @answer.question
-    respond_to do |format|
-      @answer.decrement!(:vote_count, 1)
-      format.js { render :vote }
-    end
+    @answer.decrement!(:vote_count, 1)
+    render :vote
   end
 
   private

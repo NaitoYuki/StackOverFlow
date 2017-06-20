@@ -13,7 +13,7 @@
       </td>
       <td class="postcell">
         <div class="post-text">
-          <p><%= answer.content %></p>
+          <%= markdown answer.content %>
         </div>
         <table class="answer-footer">
           <tbody>
@@ -28,7 +28,7 @@
               </td>
               <td class="post-signature">
                 <div class="user-info">
-                  <div class="user-action-time">回答日時:<%= answer.updated_at.strftime('%y年%m月%d日 %H:%M') %></div>
+                  <div class="user-action-time"><%= answer_time(answer) %></div>
                   <div class="user-avatar">
                     <%= profile_img_32(answer.user) %>
                   </div>

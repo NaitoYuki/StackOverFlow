@@ -6,14 +6,12 @@
 
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <h3>プロフィール</h3>
       <p>
         <%= profile_img(@user) %>
         <%= @user.name %>
       </p>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>お気に入り</h3>
       <p>
         <% @user.likes.each do |like| %>
           質問タイトル：<%= link_to like.question.title, question_path(like.question.id) %><br />
@@ -21,7 +19,6 @@
       </p>
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>貢献度</h3>
 
       <p><%= contribute(@user) %></p>
 
