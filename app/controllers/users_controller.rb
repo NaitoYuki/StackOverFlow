@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
-    @users = User.where.not(id: current_user.id)
+    @users = User.all.includes(:answers, :questions)
   end
 
   def show

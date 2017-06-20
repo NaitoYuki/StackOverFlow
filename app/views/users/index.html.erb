@@ -1,4 +1,48 @@
-<% @users.each do |user| %>
- <%= profile_img(user) %>
- <%= link_to user.name, user %>
-<% end %>
+
+<div class="container">
+  <div id="content" class="row">
+      <div id="mainbar-full">
+        <div class="subheader">
+          <h1 id="h-users">ユーザー</h1>
+        </div>
+          <div id="user-browser">
+            <table>
+              <tr>
+                <% @users.each do |user| %>
+                <div class="col-md-3">
+                <td>
+                  <div class="user-info">
+                    <div class="user-gravatar48">
+                      <a href="<% link_to user %>">
+                        <div class="gravatar-wrapper-48">
+                          <%= profile_img(user) %>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="user-details">
+                      <a href="#"><%= link_to user.name, user %></a>
+                      <% @sum = 0 %>
+                      <% user.answers.each do |answer| %>
+                        <% @sum += answer.vote_count %>
+                      <% end %>
+                      <% user.questions.each do |question| %>
+                        <% @sum += question.vote_count %>
+                      <% end %>
+                        <div class="-flair">
+                          <span class="reputation-score" dir="ltr"><%= @sum %></span>
+                        </div>
+                    </div>
+                    <div class="user-tags">
+                      <a href="#"></a>
+                    </div>
+                  </div>
+                </td>
+                </div>
+                <% end %>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
