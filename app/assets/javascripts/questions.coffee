@@ -1,4 +1,4 @@
-$ ->
+$(document).on ->
   replaceMarkdown = (elm) ->
     v = undefined
     old = elm.value
