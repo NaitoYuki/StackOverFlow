@@ -80,3 +80,4 @@ gem 'gon'
 
 # マークダウン用gem
 gem 'marked-rails'
+gem 'redcarpet'
