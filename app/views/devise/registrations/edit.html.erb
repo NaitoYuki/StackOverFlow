@@ -59,14 +59,25 @@
 
     <div id="menu1" class="tab-pane fade">
       <p>
+        <% current_user.likes.each do |like| %>
+          質問タイトル：<%= link_to like.question.title, question_path(@user, @question) %><br />
+        <% end %>
       </p>
     </div>
     <div id="menu2" class="tab-pane fade">
       <p>
+        <% current_user.questions.each do |question| %>
+          質問タイトル：<%= question.title %><br />
+          質問内容：<%= question.content %>
+          <hr />
+        <% end %>
       </p>
     </div>
     <div id="menu3" class="tab-pane fade">
       <p>
+        <% current_user.answers.each do |answer| %>
+         回答一覧：<%= answer.content %><br />
+        <% end %>
       </p>
     </div>
   </div>

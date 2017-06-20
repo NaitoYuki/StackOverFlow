@@ -21,10 +21,10 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show] do
-    resources :questions
+    resources :questions, only: [:index, :show]
   end
 
-  resources :questions do
+  resources :questions, only: [:index, :show] do
     resources :likes, only: [:create, :destroy]
   end
 
