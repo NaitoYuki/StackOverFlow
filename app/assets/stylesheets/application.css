@@ -52,13 +52,11 @@ header ul a {
   border: 0;
 }
 
-.navbar-default {
-  .navbar-brand {
-    color: #fff;
-    &:hover {
-      color: white;
-    }
-  }
+.navbar-brand {
+  color: #fff;
+  &:hover {
+  color: white;
+}
 
 .navbar-nav > li > a {
   color: #fff;
