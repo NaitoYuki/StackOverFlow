@@ -15,6 +15,9 @@
     <div id="menu1" class="tab-pane fade">
       <h3>お気に入り</h3>
       <p>
+        <% @user.likes.each do |like| %>
+          質問タイトル：<%= link_to like.question.title, question_path(like.question.id) %><br />
+        <% end %>
       </p>
     </div>
     <div id="menu2" class="tab-pane fade">
