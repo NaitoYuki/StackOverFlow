@@ -1,4 +1,4 @@
-$(document).on ->
+$(document).on 'turbolinks:load', ->
   replaceMarkdown = (elm) ->
     v = undefined
     old = elm.value
