@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(email: auth.info.email)
+    # facebookにemailを登録していない場合
+    unless user
+      user = User.find_by(provider: auth.provider, uid: auth.uid)
+    end
 
     unless user
       user = User.new(
