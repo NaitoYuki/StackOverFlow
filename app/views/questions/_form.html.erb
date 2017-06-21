@@ -1,12 +1,23 @@
 <%= form_for(@question) do |f| %>
+<% if @question.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= @question.errors.count %>件のエラーがあります。
+    </div>
+    <ul>
+    <% @question.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="form-group">
   <%= f.label :title %>
   <%= f.text_field :title, class: 'form-control', placeholder: 'プログラミングに関しての質問は何ですか？具体的に書いてください。'  %>
 </div>
 <div class="form-group">
   <div id='editor'>
-    <textarea name="question[content]" class="form-control" rows="10"><%= @question.content %></textarea>
-    <!-- <%= f.text_area :content, class: 'form-control', rows: 10 %> -->
+    <%= f.text_area :content, class: 'form-control', rows: 10 %>
     <div id="marked-area"></div>
   </div>
 </div>
