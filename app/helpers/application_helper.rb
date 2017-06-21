@@ -1,6 +1,8 @@
 module ApplicationHelper
   def login_user?(obj)
-    obj.user.id == current_user.id
+    if user_signed_in?
+      obj.user.id == current_user.id
+    end
   end
 
   def profile_img(user)
@@ -16,17 +18,6 @@ module ApplicationHelper
 
   def contribute(user)
     user.questions.sum(:vote_count) + user.answers.sum(:vote_count)
-  end
-
-  def profile_img_32(user)
-    return image_tag(user.avatar, alt: user.name, size: '32x32') if user.avatar?
-
-    unless user.provider.blank?
-      img_url = user.image_url
-    else
-      img_url = 'no_image.png'
-    end
-    image_tag(img_url, alt: user.name, size: '32x32')
   end
 
   def markdown(text)

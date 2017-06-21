@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user! # ログイン時のみ使用可能
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :set_question, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :set_question_tags_to_gon, only: [:edit]
   before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update, :show]

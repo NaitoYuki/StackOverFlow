@@ -17,10 +17,14 @@
                   <div class="favorite">
                     <!-- いいねボタン -->
                     <p>
-                    <% if current_user.already_liked?(@question) %>
-                      <%= link_to '', question_like_path(question_id: @question.id), remote: true, method: :delete, class: 'fa fa-star fa-2x star-on' %>
+                    <% if user_signed_in? %>
+                      <% if current_user.already_liked?(@question) %>
+                        <%= link_to '', question_like_path(question_id: @question.id), remote: true, method: :delete, class: 'fa fa-star fa-2x star-on' %>
+                        <% else %>
+                        <%= link_to '', question_likes_path(question_id: @question.id), remote: true, method: :post, class: 'fa fa-star fa-2x star-off' %>
+                        <% end %>
                     <% else %>
-                      <%= link_to '', question_likes_path(question_id: @question.id), remote: true, method: :post, class: 'fa fa-star fa-2x star-off' %>
+                      <i class="fa fa-star fa-2x star-off"></i>
                     <% end %>
                     </p>
                     <p class="vote-count"><%= @question.likes.count %></p>
@@ -50,7 +54,7 @@
                         <div class="user-info">
                           <div class="user-action-time"><%= question_time(@question) %></div>
                           <div class="user-avatar">
-                            <%= profile_img_32(@question.user) %>
+                            <%= profile_img(@question.user) %>
                           </div>
                           <div class="user-details">
                             <%= link_to @question.user.name, user_path(@question.user) %>
