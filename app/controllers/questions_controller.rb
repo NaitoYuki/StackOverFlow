@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user! # ログイン時のみ使用可能
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :set_question, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :set_question_tags_to_gon, only: [:edit]
   before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update, :show]
@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user_id = current_user.id
     if @question.save
-      redirect_to questions_path, notice: "質問を投稿しました！"
+      redirect_to questions_path, success: "質問を投稿しました。"
     else
       render 'new'
     end
@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to questions_path, notice: "質問を更新しました!"
+      redirect_to questions_path, success: "質問を更新しました。"
     else
       render 'edit'
     end
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to questions_path, notice: "質問を削除しました！"
+    redirect_to questions_path, danger: "質問を削除しました。"
   end
 
   def vote_up

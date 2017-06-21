@@ -1,12 +1,16 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_answer, only: [:edit, :update, :destroy, :vote_up, :vote_down]
 
   def edit
   end
 
   def update
-    @answer.update(answer_params)
-    redirect_to question_path(@answer.question), notice: "回答を更新しました！"
+    if @answer.update(answer_params)
+      redirect_to question_path(@answer.question), success: "回答を更新しました。"
+    else
+      redirect_to edit_question_answer_path(@answer.question, @answer), danger: "回答を入力してください。"
+    end
   end
 
   def create
@@ -16,7 +20,7 @@ class AnswersController < ApplicationController
     if @answer.save
       render :index
     else
-      render 'questions/index'
+      redirect_to question_path(@answer.question), danger: "回答を入力してください。"
     end
   end
 

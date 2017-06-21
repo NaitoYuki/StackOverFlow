@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  root 'top#index'
+  root 'questions#index'
 
   resources :questions do
     member do

@@ -1,6 +1,23 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.question-wrapper {
+  padding-bottom: 100px;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 20px;
+  }
+}
+
+.field_with_errors .form-control{
+  border-color: red;
+}
+
 .question-wrapper {
   .ui-helper-hidden-accessible {
     display: none;
@@ -106,6 +123,11 @@
     width: 32px;
     height: 32px;
     border-radius: 1px;
+  }
+
+  .user-info .user-avatar img {
+    width: 32px;
+    height: 32px;
   }
 
   .user-info .user-avatar+.user-details {
