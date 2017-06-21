@@ -1,27 +1,31 @@
-<ul class="nav nav-tabs">
-   <li class="active"><a data-toggle="tab" href="#home">プロフィール</a></li>
-   <li><a data-toggle="tab" href="#menu1">お気に入り</a></li>
-   <li><a data-toggle="tab" href="#menu2">貢献度</a></li>
- </ul>
+<div class="container">
+  <div class="row">
+    <div class="wrapper col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
+      <ul class="nav nav-tabs">
+         <li class="active"><a data-toggle="tab" href="#home">プロフィール</a></li>
+         <li><a data-toggle="tab" href="#menu1">お気に入り</a></li>
+         <li><a data-toggle="tab" href="#menu2">貢献度</a></li>
+       </ul>
 
-<div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <p>
-        <%= profile_img(@user) %>
-        <%= @user.name %>
-      </p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <p>
-        <% @user.likes.each do |like| %>
-          質問タイトル：<%= link_to like.question.title, question_path(like.question.id) %><br />
-        <% end %>
-      </p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-
-      <p><%= contribute(@user) %></p>
-
-    </div>
-  </div>
-</div>
+       <div class="tab-content">
+         <div id="home" class="tab-pane fade in active">
+           <p>
+             <%= profile_img(@user) %><br />
+             <%= @user.name %>
+           </p>
+         </div>
+         <div id="menu1" class="tab-pane fade">
+           <p>
+             <% @user.likes.each do |like| %>
+               質問タイトル：<%= link_to like.question.title, question_path(like.question.id) %><br />
+               <hr />
+             <% end %>
+           </p>
+         </div>
+         <div id="menu2" class="tab-pane fade">
+           <p><%= contribute(@user) %></p>
+         </div>
+       </div><!-- tab-content -->
+    </div><!-- wrapper -->
+  </div><!-- row -->
+</div><!-- container -->
