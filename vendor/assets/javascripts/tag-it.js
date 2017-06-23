@@ -1,29 +1,3 @@
-/*
-* jQuery UI Tag-it!
-*
-* @version v2.0 (06/2011)
-*
-* Copyright 2011, Levy Carneiro Jr.
-* Released under the MIT license.
-* http://aehlke.github.com/tag-it/LICENSE
-*
-* Homepage:
-*   http://aehlke.github.com/tag-it/
-*
-* Authors:
-*   Levy Carneiro Jr.
-*   Martin Rehfeld
-*   Tobias Schmidt
-*   Skylar Challand
-*   Alex Ehlke
-*
-* Maintainer:
-*   Alex Ehlke - Twitter: @aehlke
-*
-* Dependencies:
-*   jQuery v1.4+
-*   jQuery UI v1.8+
-*/
 (function($) {
 
     $.widget('ui.tagit', {
@@ -31,60 +5,29 @@
             allowDuplicates   : false,
             caseSensitive     : true,
             fieldName         : 'tags',
-            placeholderText   : null,   // Sets `placeholder` attr on input field.
-            readOnly          : false,  // Disables editing.
-            removeConfirmation: false,  // Require confirmation to remove tags.
-            tagLimit          : null,   // Max number of tags allowed (null for unlimited).
+            placeholderText   : null,
+            readOnly          : false,
+            removeConfirmation: false,
+            tagLimit          : null,
 
-            // Used for autocomplete, unless you override `autocomplete.source`.
             availableTags     : [],
 
-            // Use to override or add any options to the autocomplete widget.
-            //
-            // By default, autocomplete.source will map to availableTags,
-            // unless overridden.
             autocomplete: {},
 
-            // Shows autocomplete before the user even types anything.
             showAutocompleteOnFocus: false,
 
-            // When enabled, quotes are unneccesary for inputting multi-word tags.
             allowSpaces: false,
 
-            // The below options are for using a single field instead of several
-            // for our form values.
-            //
-            // When enabled, will use a single hidden field for the form,
-            // rather than one per tag. It will delimit tags in the field
-            // with singleFieldDelimiter.
-            //
-            // The easiest way to use singleField is to just instantiate tag-it
-            // on an INPUT element, in which case singleField is automatically
-            // set to true, and singleFieldNode is set to that element. This
-            // way, you don't need to fiddle with these options.
             singleField: false,
 
-            // This is just used when preloading data from the field, and for
-            // populating the field with delimited tags as the user adds them.
             singleFieldDelimiter: ',',
 
-            // Set this to an input DOM node to use an existing form field.
-            // Any text in it will be erased on init. But it will be
-            // populated with the text of tags as they are created,
-            // delimited by singleFieldDelimiter.
-            //
-            // If this is not set, we create an input node for it,
-            // with the name given in settings.fieldName.
             singleFieldNode: null,
 
-            // Whether to animate tag removals or not.
             animate: true,
 
-            // Optionally set a tabindex attribute on the input that gets
-            // created for tag-it.
             tabIndex: null,
 
-            // Event callbacks.
             beforeTagAdded      : null,
             afterTagAdded       : null,
 
@@ -94,27 +37,15 @@
             onTagClicked        : null,
             onTagLimitExceeded  : null,
 
-
-            // DEPRECATED:
-            //
-            // /!\ These event callbacks are deprecated and WILL BE REMOVED at some
-            // point in the future. They're here for backwards-compatibility.
-            // Use the above before/after event callbacks instead.
             onTagAdded  : null,
             onTagRemoved: null,
-            // `autocomplete.source` is the replacement for tagSource.
+
             tagSource: null
-            // Do not use the above deprecated options.
         },
 
         _create: function() {
-            // for handling static scoping inside callbacks
             var that = this;
 
-            // There are 2 kinds of DOM nodes this widget can be instantiated on:
-            //     1. UL, OL, or some element containing either of these.
-            //     2. INPUT, in which case 'singleField' is overridden to true,
-            //        a UL is created and the INPUT is hidden.
             if (this.element.is('input')) {
                 this.tagList = $('<ul></ul>').insertAfter(this.element);
                 this.options.singleField = true;
@@ -140,8 +71,6 @@
                 this.options.autocomplete.source = function(search, showChoices) {
                     var filter = search.term.toLowerCase();
                     var choices = $.grep(this.options.availableTags, function(element) {
-                        // Only match autocomplete options that begin with the search term.
-                        // (Case insensitive.)
                         return (element.toLowerCase().indexOf(filter) === 0);
                     });
                     if (!this.options.allowDuplicates) {
@@ -161,12 +90,10 @@
                 }
             }
 
-            // Bind autocomplete.source callback functions to this context.
             if ($.isFunction(this.options.autocomplete.source)) {
                 this.options.autocomplete.source = $.proxy(this.options.autocomplete.source, this);
             }
 
-            // DEPRECATED.
             if ($.isFunction(this.options.tagSource)) {
                 this.options.tagSource = $.proxy(this.options.tagSource, this);
             }
@@ -174,7 +101,6 @@
             this.tagList
                 .addClass('tagit')
                 .addClass('ui-widget ui-widget-content ui-corner-all')
-                // Create the input field.
                 .append($('<li class="tagit-new"></li>').append(this.tagInput))
                 .click(function(e) {
                     var target = $(e.target);
@@ -184,18 +110,13 @@
                             that._trigger('onTagClicked', e, {tag: tag, tagLabel: that.tagLabel(tag)});
                         }
                     } else {
-                        // Sets the focus() to the input field, if the user
-                        // clicks anywhere inside the UL. This is needed
-                        // because the input field needs to be of a small size.
                         that.tagInput.focus();
                     }
                 });
 
-            // Single field support.
             var addedExistingFromSingleFieldNode = false;
             if (this.options.singleField) {
                 if (this.options.singleFieldNode) {
-                    // Add existing tags from the input field.
                     var node = $(this.options.singleFieldNode);
                     var tags = node.val().split(this.options.singleFieldDelimiter);
                     node.val('');
@@ -204,13 +125,11 @@
                         addedExistingFromSingleFieldNode = true;
                     });
                 } else {
-                    // Create our single field input after our list.
                     this.options.singleFieldNode = $('<input type="hidden" style="display:none;" value="" name="' + this.options.fieldName + '" />');
                     this.tagList.after(this.options.singleFieldNode);
                 }
             }
 
-            // Add existing tags from the list, if any.
             if (!addedExistingFromSingleFieldNode) {
                 this.tagList.children('li').each(function() {
                     if (!$(this).hasClass('tagit-new')) {
@@ -220,14 +139,11 @@
                 });
             }
 
-            // Events.
             this.tagInput
                 .keydown(function(event) {
-                    // Backspace is not detected within a keypress, so it must use keydown.
                     if (event.which == $.ui.keyCode.BACKSPACE && that.tagInput.val() === '') {
                         var tag = that._lastTag();
                         if (!that.options.removeConfirmation || tag.hasClass('remove')) {
-                            // When backspace is pressed, the last tag is deleted.
                             that.removeTag(tag);
                         } else if (that.options.removeConfirmation) {
                             tag.addClass('remove ui-state-highlight');
@@ -236,10 +152,6 @@
                         that._lastTag().removeClass('remove ui-state-highlight');
                     }
 
-                    // Comma/Space/Enter are all valid delimiters for new tags,
-                    // except when there is an open quote or if setting allowSpaces = true.
-                    // Tab will also create a tag, unless the tag input is empty,
-                    // in which case it isn't caught.
                     if (
                         (event.which === $.ui.keyCode.COMMA && event.shiftKey === false) ||
                         event.which === $.ui.keyCode.ENTER ||
@@ -260,38 +172,30 @@
                             )
                         )
                     ) {
-                        // Enter submits the form if there's no text in the input.
                         if (!(event.which === $.ui.keyCode.ENTER && that.tagInput.val() === '')) {
                             event.preventDefault();
                         }
 
-                        // Autocomplete will create its own tag from a selection and close automatically.
                         if (!(that.options.autocomplete.autoFocus && that.tagInput.data('autocomplete-open'))) {
                             that.tagInput.autocomplete('close');
                             that.createTag(that._cleanedInput());
                         }
                     }
                 }).blur(function(e){
-                    // Create a tag when the element loses focus.
-                    // If autocomplete is enabled and suggestion was clicked, don't add it.
                     if (!that.tagInput.data('autocomplete-open')) {
                         that.createTag(that._cleanedInput());
                     }
                 });
 
-            // Autocomplete.
             if (this.options.availableTags || this.options.tagSource || this.options.autocomplete.source) {
                 var autocompleteOptions = {
                     select: function(event, ui) {
                         that.createTag(ui.item.value);
-                        // Preventing the tag input to be updated with the chosen value.
                         return false;
                     }
                 };
                 $.extend(autocompleteOptions, this.options.autocomplete);
 
-                // tagSource is deprecated, but takes precedence here since autocomplete.source is set by default,
-                // while tagSource is left null by default.
                 autocompleteOptions.source = this.options.tagSource || autocompleteOptions.source;
 
                 this.tagInput.autocomplete(autocompleteOptions).bind('autocompleteopen.tagit', function(event, ui) {
@@ -352,7 +256,6 @@
         },
 
         _cleanedInput: function() {
-            // Returns the contents of the tag input, cleaned and ready to be passed to createTag
             return $.trim(this.tagInput.val().replace(/^"(.*)"$/, '$1'));
         },
 
@@ -365,7 +268,6 @@
         },
 
         assignedTags: function() {
-            // Returns an array of tag string values
             var that = this;
             var tags = [];
             if (this.options.singleField) {
@@ -382,7 +284,6 @@
         },
 
         _updateSingleTagsField: function(tags) {
-            // Takes a list of tag string values, updates this.options.singleFieldNode.val to the tags delimited by this.options.singleFieldDelimiter
             $(this.options.singleFieldNode).val(tags.join(this.options.singleFieldDelimiter)).trigger('change');
         },
 
@@ -397,7 +298,6 @@
         },
 
         tagLabel: function(tag) {
-            // Returns the tag's string label.
             if (this.options.singleField) {
                 return $(tag).find('.tagit-label:first').text();
             } else {
@@ -469,7 +369,6 @@
 
             var label = $(this.options.onTagClicked ? '<a class="tagit-label"></a>' : '<span class="tagit-label"></span>').text(value);
 
-            // Create tag.
             var tag = $('<li></li>')
                 .addClass('tagit-choice ui-widget-content ui-state-default ui-corner-all')
                 .addClass(additionalClass)
@@ -479,20 +378,17 @@
                 tag.addClass('tagit-choice-read-only');
             } else {
                 tag.addClass('tagit-choice-editable');
-                // Button for removing the tag.
                 var removeTagIcon = $('<span></span>')
                     .addClass('ui-icon ui-icon-close');
-                var removeTag = $('<a><span class="text-icon">\xd7</span></a>') // \xd7 is an X
+                var removeTag = $('<a><span class="text-icon">\xd7</span></a>')
                     .addClass('tagit-close')
                     .append(removeTagIcon)
                     .click(function(e) {
-                        // Removes a tag when the little 'x' is clicked.
                         that.removeTag(tag);
                     });
                 tag.append(removeTag);
             }
 
-            // Unless options.singleField is set, each tag has a hidden input field inline.
             if (!this.options.singleField) {
                 var escapedValue = label.html();
                 tag.append('<input type="hidden" value="' + escapedValue + '" name="' + this.options.fieldName + '" class="tagit-hidden-field" />');
@@ -512,12 +408,10 @@
                 this._updateSingleTagsField(tags);
             }
 
-            // DEPRECATED.
             this._trigger('onTagAdded', null, tag);
 
             this.tagInput.val('');
 
-            // Insert tag.
             this.tagInput.parent().before(tag);
 
             this._trigger('afterTagAdded', null, {
@@ -536,7 +430,6 @@
 
             tag = $(tag);
 
-            // DEPRECATED.
             this._trigger('onTagRemoved', null, tag);
 
             if (this._trigger('beforeTagRemoved', null, {tag: tag, tagLabel: this.tagLabel(tag)}) === false) {
@@ -553,7 +446,7 @@
             }
 
             if (animate) {
-                tag.addClass('removed'); // Excludes this tag from _tags.
+                tag.addClass('removed');
                 var hide_args = this._effectExists('blind') ? ['blind', {direction: 'horizontal'}, 'fast'] : ['fast'];
 
                 var thisTag = this;
@@ -579,7 +472,6 @@
         },
 
         removeAll: function() {
-            // Removes all tags.
             var that = this;
             this._tags().each(function(index, tag) {
                 that.removeTag(tag, false);
