@@ -1,11 +1,9 @@
-// Place all the styles related to the tags controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 #tags-index-content {
   box-sizing: content-box;
   margin: 0 auto;
   padding: 15px;
   min-height: 450px;
+  margin-bottom: 100px;
 }
 
 .tags-index-subheader {
@@ -79,7 +77,6 @@
 }
 
 .tag-cell {
-    // width: 230px;
     height: 100px;
     border-bottom: 1px dotted #E4E6E7;
     padding-bottom: 12px;
