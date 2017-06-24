@@ -17,12 +17,12 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.all
     end
-    @questions = @questions.includes(:tags)
+    @questions = @questions.includes(:tags).order(updated_at: :DESC)
   end
 
   def show
     @answer = @question.answers.build
-    @answers = @question.answers
+    @answers = @question.answers.includes(:user).order(:created_at)
   end
 
   def new
